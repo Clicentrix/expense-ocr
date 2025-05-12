@@ -156,7 +156,7 @@ def extract_invoice_data_with_gemini(ocr_text):
         if structured_data.get('invoice_date') and isinstance(structured_data['invoice_date'], str):
             try:
                 # Try to parse and reformat to YYYY-MM-DD
-                parsed_date = date_parser.parse(structured_data['invoice_date'])
+                parsed_date = date_parse.parse(structured_data['invoice_date'])
                 structured_data['invoice_date'] = parsed_date.strftime('%Y-%m-%d')
             except (ValueError, TypeError, OverflowError):
                 current_app.logger.warning(f"Could not parse invoice_date '{structured_data['invoice_date']}' to YYYY-MM-DD. Keeping original string.")
