@@ -62,12 +62,12 @@ function InvoiceList({ refreshTrigger, onFetchError, onInvoiceSelect }) {
     }
 
     if (invoices.length === 0) {
-        return <p className="text-center mt-2">No invoices found yet. Upload one to get started!</p>;
+        return <p className="text-center mt-2">No Expense History found yet. Upload one to get started!</p>;
     }
 
     return (
         <div className="invoice-list-section card">
-            <h2>Invoice History</h2>
+            <h2>Expense History</h2>
             {error && <div className="message error mb-1">Error refreshing list: {error}</div>} {/* Show minor error if list is already there */}
             <div className="invoice-table-container">
                 <table className="invoice-table">
