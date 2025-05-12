@@ -1,0 +1,48 @@
+.notification {
+  padding: 15px 20px;
+  margin: 15px 0;
+  border-radius: var(--border-radius);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-size: 0.95em;
+}
+
+.notification p {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.notification-success {
+  background-color: var(--success-color);
+}
+
+.notification-error {
+  background-color: var(--error-color);
+}
+
+.notification-warning {
+  background-color: var(--warning-color);
+  color: var(--text-color-light); /* Darker text for yellow background */
+}
+
+.notification-info {
+  background-color: var(--primary-color);
+}
+
+.notification-close-btn {
+  background: none;
+  border: none;
+  color: inherit; /* Inherits color from parent, so white for success/error/info, dark for warning */
+  font-size: 1.5em;
+  line-height: 1;
+  padding: 0 0 0 15px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.notification-close-btn:hover {
+  opacity: 1;
+} 

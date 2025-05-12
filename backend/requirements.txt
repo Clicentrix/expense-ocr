@@ -1,0 +1,9 @@
+Flask
+python-dotenv
+Flask-CORS
+mysql-connector-python
+google-cloud-vision # For OCR
+google-generativeai # For Gemini
+python-dateutil # For flexible date parsing
+# google-cloud-documentai # Commenting out as we shift to Gemini for parsing
+google-auth 

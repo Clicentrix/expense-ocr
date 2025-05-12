@@ -1,0 +1,106 @@
+.invoice-list-section h2 {
+  text-align: center;
+  display: block; /* Override inline-block from App.css for centered title */
+}
+
+.invoice-table-container {
+  overflow-x: auto; /* Allow horizontal scrolling on small screens */
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.95em;
+}
+
+.invoice-table th,
+.invoice-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.invoice-table th {
+  background-color: #f9f9f9; /* Lighter than card bg for header */
+  color: var(--text-color-light);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.invoice-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.invoice-table tbody tr.invoice-row:hover {
+  background-color: #f1f1f1; /* Light hover for rows */
+  cursor: default; /* Change to pointer if rows are clickable for details */
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 15px; /* More pill-like */
+  font-size: 0.85em;
+  font-weight: 500;
+  color: #fff;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.status-processed {
+  background-color: var(--success-color);
+}
+
+.status-uploaded,
+.status-processing {
+  background-color: var(--warning-color);
+  color: var(--text-color-light); /* Darker text for yellow */
+}
+
+.status-error {
+  background-color: var(--error-color);
+}
+
+.amount-cell {
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Responsive table: Stack on small screens */
+@media screen and (max-width: 768px) {
+  .invoice-table thead {
+    display: none; /* Hide table headers */
+  }
+  .invoice-table tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .invoice-table td {
+    display: block;
+    text-align: right;
+    padding-left: 50%; /* Make space for the label */
+    position: relative;
+    border-bottom: 1px dotted var(--border-color); /* Dotted lines between fields */
+  }
+  .invoice-table td:last-child {
+    border-bottom: none; /* No line for the last field */
+  }
+  .invoice-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: calc(50% - 30px); /* Adjust width considering padding */
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  .amount-cell {
+    text-align: right; /* Keep amount aligned right on mobile */
+  }
+} 

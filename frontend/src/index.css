@@ -1,0 +1,105 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primary-color: #6c63ff; /* A nice purple */
+  --primary-hover-color: #574fd8;
+  --secondary-color: #f5f5f5; /* Light grey for backgrounds */
+  --text-color-light: #1a1a1a; /* Dark text on light backgrounds */
+  --text-color-dark: rgba(255, 255, 255, 0.87); /* Light text on dark backgrounds */
+  --border-color: #e0e0e0;
+  --success-color: #4CAF50;
+  --error-color: #F44336;
+  --warning-color: #FFC107;
+  --card-bg-light: #ffffff;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+/* Light theme variables (can be toggled with a class on body or html) */
+body.light-theme {
+  color-scheme: light;
+  color: var(--text-color-light);
+  background-color: var(--secondary-color);
+}
+
+body.light-theme .card, body.light-theme .upload-section, body.light-theme .invoice-list-section {
+  background-color: var(--card-bg-light);
+  box-shadow: var(--card-shadow);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply light theme by default for this example */
+body {
+  color-scheme: light;
+  color: var(--text-color-light);
+  background-color: var(--secondary-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+button {
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--primary-color);
+  color: var(--text-color-dark);
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+button:hover {
+  background-color: var(--primary-hover-color);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+input[type="file"] {
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.6em 1em;
+  background-color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}

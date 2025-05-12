@@ -1,0 +1,68 @@
+.upload-section h2 {
+  text-align: center;
+  display: block; /* Override inline-block from App.css for centered title */
+}
+
+.upload-prompt {
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.drop-zone {
+  border: 3px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  width: 100%;
+  max-width: 500px; /* Limit width of drop zone */
+  margin-bottom: 20px;
+  background-color: #fdfdfd;
+}
+
+.drop-zone.active {
+  border-color: var(--primary-color);
+  background-color: #f0f8ff; /* Light blue */
+}
+
+.drop-zone p {
+  margin: 0;
+  color: #777;
+  font-size: 1.1em;
+}
+
+.file-name-display {
+  font-weight: bold;
+  color: var(--primary-color) !important; /* Ensure this text is colored */
+}
+
+.file-info {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: -10px; /* Pull it closer to drop-zone */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.upload-button {
+  width: 100%;
+  max-width: 250px; /* Limit button width */
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Space between spinner and text */
+}
+
+.upload-button .spinner-container-small {
+  padding: 0; /* Remove padding from spinner when inside button */
+} 
