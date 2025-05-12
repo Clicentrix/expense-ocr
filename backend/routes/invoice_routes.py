@@ -78,7 +78,12 @@ def upload_invoice():
             
             ocr_text = "" # Default to empty if OCR fails
             try:
-                ocr_text = vision_service.get_ocr_text_from_image(image_content)
+                # Pass file_path and mime_type to handle PDFs differently
+                ocr_text = vision_service.get_ocr_text_from_image(
+                    image_content=image_content,
+                    file_path=file_path,
+                    mime_type=mime_type
+                )
             except Exception as ocr_error:
                 current_app.logger.error(f"OCR step failed for {unique_filename}: {ocr_error}")
                 # Decide if you want to proceed without OCR text or mark as error
@@ -102,11 +107,13 @@ def upload_invoice():
                 status = 'processed', processed_at = CURRENT_TIMESTAMP,
                 raw_text = %s, 
                 invoice_number = %s
+                /* Note: currency column will be added later */
             WHERE id = %s
             """
             
             db_invoice_date = structured_data.get('invoice_date')
             # The vision_service now attempts to parse to YYYY-MM-DD, or keeps original string
+            detected_currency = structured_data.get('detected_currency') # Get the detected currency, will be used when currency column exists
 
             cursor.execute(update_sql, (
                 structured_data.get('total_amount'),
@@ -114,6 +121,7 @@ def upload_invoice():
                 db_invoice_date, 
                 structured_data.get('raw_text', ocr_text), # Use Gemini's raw_text if it differs, else original OCR
                 structured_data.get('invoice_number'),
+                # detected_currency, # Commenting out until the column exists in the database
                 invoice_id
             ))
             

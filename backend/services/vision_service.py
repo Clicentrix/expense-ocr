@@ -3,7 +3,7 @@ import os
 import json
 import re 
 
-
+import pdfplumber # For PDF text extraction
 from google.cloud import vision
 
 # For Gemini API
@@ -11,8 +11,54 @@ import google.generativeai as genai
 from dateutil import parser as date_parse
 
 
-def get_ocr_text_from_image(image_content):
-    """Detects text in the image file using Google Cloud Vision API."""
+def extract_text_from_pdf(file_path):
+    """Extracts text from a PDF file using pdfplumber."""
+    current_app.logger.info(f"Attempting to extract text from PDF: {file_path}")
+    try:
+        all_text = []
+        with pdfplumber.open(file_path) as pdf:
+            current_app.logger.info(f"PDF opened successfully. Contains {len(pdf.pages)} pages.")
+            for i, page in enumerate(pdf.pages):
+                text = page.extract_text() or ""
+                if text.strip():
+                    all_text.append(text)
+                current_app.logger.debug(f"Extracted {len(text)} characters from page {i+1}")
+        
+        combined_text = "\n\n".join(all_text)
+        current_app.logger.info(f"Successfully extracted {len(combined_text)} characters from PDF.")
+        current_app.logger.debug(f"---BEGIN FULL PDF TEXT FOR GEMINI---\n{combined_text}\n---END FULL PDF TEXT FOR GEMINI---")
+        return combined_text
+    except Exception as e:
+        current_app.logger.error(f"Error extracting text from PDF: {e}")
+        raise
+
+
+def get_ocr_text_from_image(image_content, file_path=None, mime_type=None):
+    """
+    Extracts text from an image or PDF file.
+    For PDFs, uses pdfplumber.
+    For images, uses Google Cloud Vision API.
+    
+    Parameters:
+        image_content: The binary content of the file
+        file_path: Optional, the path to the file (required for PDFs)
+        mime_type: Optional, the MIME type of the file
+    """
+    # Determine if the file is a PDF
+    is_pdf = False
+    if mime_type and "pdf" in mime_type.lower():
+        is_pdf = True
+    elif file_path and file_path.lower().endswith(".pdf"):
+        is_pdf = True
+    
+    # If it's a PDF, use pdfplumber
+    if is_pdf:
+        if not file_path:
+            raise ValueError("File path is required for PDF processing")
+        current_app.logger.info(f"Detected PDF file, using pdfplumber for text extraction")
+        return extract_text_from_pdf(file_path)
+    
+    # Otherwise, use Vision API for images
     current_app.logger.info("Attempting OCR with Google Cloud Vision API...")
     try:
         client = vision.ImageAnnotatorClient() # Assumes GOOGLE_APPLICATION_CREDENTIALS is set

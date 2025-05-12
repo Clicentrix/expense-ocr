@@ -5,5 +5,6 @@ mysql-connector-python
 google-cloud-vision # For OCR
 google-generativeai # For Gemini
 python-dateutil # For flexible date parsing
+pdfplumber # For extracting text from PDFs
 # google-cloud-documentai # Commenting out as we shift to Gemini for parsing
 google-auth 

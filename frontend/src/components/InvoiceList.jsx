@@ -95,7 +95,9 @@ function InvoiceList({ refreshTrigger, onFetchError, onInvoiceSelect }) {
                                 <td data-label="Vendor">{invoice.vendor_name || '-'}</td>
                                 <td data-label="Invoice Date">{invoice.invoice_date ? formatDate(invoice.invoice_date) : '-'}</td>
                                 <td data-label="Total" className="amount-cell">
-                                    {invoice.total_amount ? `$${parseFloat(invoice.total_amount).toFixed(2)}` : '-'}
+                                    {invoice.total_amount ? 
+                                        `₹${parseFloat(invoice.total_amount).toFixed(2)}` 
+                                        : '-'}
                                 </td>
                                 {/* <td data-label="Actions">View</td> */}
                             </tr>
